@@ -107,6 +107,14 @@ void showTime(time_t t)
   {
     last_t = t;
     int h = hour(t);
+    if (h>12)
+    { 
+      h = h-12;
+    }
+    if (h=0)
+    { 
+      h = 12;
+    }
     if (h>=10)
     { 
       sevenSegment(HOUR_10_DIGIT, h/10);
