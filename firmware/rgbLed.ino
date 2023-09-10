@@ -100,37 +100,40 @@ void time2sys(time_t t)
 {
   setTime(t);
 }
+
 time_t last_t;
+
 void showTime(time_t t)
 {
   if (t != last_t)
   {
     last_t = t;
     int h = hour(t);
-    if (h>12)
+    if (h > 12)
     { 
-      h = h-12;
+      h = h - 12;
     }
-    if (h=0)
+    if (h == 0)
     { 
       h = 12;
     }
-    if (h>=10)
+    if (h >= 10)
     { 
-      sevenSegment(HOUR_10_DIGIT, h/10);
+      sevenSegment(HOUR_10_DIGIT, h / 10);
     }
     else
     {
       sevenSegment(HOUR_10_DIGIT, 0x14);
     }
-    sevenSegment(HOUR_01_DIGIT, h%10);
+    sevenSegment(HOUR_01_DIGIT, h % 10);
     int m = minute(t);
-    sevenSegment(MIN_10_DIGIT, m/10);
-    sevenSegment(MIN_01_DIGIT, m%10);
+    sevenSegment(MIN_10_DIGIT, m / 10);
+    sevenSegment(MIN_01_DIGIT, m % 10);
     int s = second(t);
+    
 #if DIGITS == 6
-    sevenSegment(SEC_10_DIGIT, s/10);
-    sevenSegment(SEC_01_DIGIT, s%10);
+    sevenSegment(SEC_10_DIGIT, s / 10);
+    sevenSegment(SEC_01_DIGIT, s % 10);
 #endif
 
     uint32_t dotColor;
